@@ -3,10 +3,7 @@ package controllers;
 import play.*;
 import play.mvc.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 import models.*;
@@ -19,12 +16,13 @@ public class Application extends Controller {
     
     public static void upload(String label,File uploadFile){
         //uploadFile = new File();
-        String result = reader(uploadFile);
-
-        render(label,result);
+        List<Log> logs = new Parser(uploadFile,label).getLogs();
+        //String result = reader(uploadFile);
+        //String name =   logs.get(2).getName();
+        render(label,logs);
     }
     
-    private static String reader(File file){
+    /*private static String reader(File file){
         int ch;
         StringBuffer strContent = new StringBuffer("");
         FileInputStream fin = null;
@@ -36,6 +34,7 @@ public class Application extends Controller {
         } catch (Exception e) {
             System.out.println(e);
         }
+
         return  strContent.toString();
-    }
+    }   */
 }
