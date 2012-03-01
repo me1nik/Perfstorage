@@ -11,30 +11,38 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+    	List<JmeterLog> jmeters = JmeterLog.findAll();
+        render(jmeters);
     }
     
     public static void upload(String label,File uploadFile){
-        //uploadFile = new File();
-        List<Log> logs = new Parser(uploadFile,label).getLogs();
-        //String result = reader(uploadFile);
-        //String name =   logs.get(2).getName();
-        render(label,logs);
+       // List<Log> logs = new Parser(uploadFile,label).getLogs();
+        JmeterLog jmeter = new JmeterLog(label);
+        List<Data> data = new Parser(uploadFile,label).getData();
+        //List<Data> data = new ArrayList<Data>();
+        /*for(Log log:logs){
+        	//jmeter.setData(new ArrayList<Data>(new Data(log.getTimestamp(), log.getElapsed(), log.getLabel(), log.getSuccess(), log.getBytes(), log.getThreads(), log.getLatency())));
+        	data.add(new Data(log.getTimestamp(), log.getElapsed(), log.getLabel(), log.getSuccess(), log.getBytes(), log.getThreads(), log.getLatency()));
+        	//new JmeterLog(label, new Data(log.getTimestamp(), log.getElapsed(), log.getLabel(), log.getSuccess(), log.getBytes(), log.getThreads(), log.getLatency())).save();
+        	
+        
+        } */
+            jmeter.setData(data);
+            jmeter.save();
+            redirect("/");
     }
     
-    /*private static String reader(File file){
-        int ch;
-        StringBuffer strContent = new StringBuffer("");
-        FileInputStream fin = null;
-        try {
-            fin = new FileInputStream(file);
-            while ((ch = fin.read()) != -1)
-                strContent.append((char) ch);
-            fin.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    
+    public static void jmeterJson(String name) {
+        JmeterLog jmeters = JmeterLog.findById(name);
+        List<Data> data = jmeters.getData();
+        renderJSON(data);
+      
+        
+    }
+    
+    public static void info(String name){
+    	render(name);
+    }
 
-        return  strContent.toString();
-    }   */
 }
