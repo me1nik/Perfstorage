@@ -9,6 +9,11 @@ import java.util.*;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import com.google.code.morphia.Key;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import models.*;
 
@@ -49,6 +54,7 @@ public class Application extends Controller {
         //List<JmeterLog> jmeters = JmeterLog.q().findBy("nameTest",name).asList();
     	Key<JmeterLog> log = JmeterLog.find("nameTest", name).getKey();
     	List<Data> data = Data.find("name", log).asList();
+
     	//Object id = JmeterLog.find("nameTest", name).getKey().getId();
     	//notFoundIfNull(id);
     	//List<Data> data = Data.find("name", id).asList();
@@ -58,8 +64,43 @@ public class Application extends Controller {
     
     
     public static void vusers(String name){
+    	Gson gson = new Gson();
+    	Key<JmeterLog> log = JmeterLog.find("nameTest", name).getKey();
+    	List<Data> data = Data.find("name", log).asList();
+    	List<Vusers> vuser = new ArrayList<Vusers>();
+    	StringBuffer buf = new StringBuffer();
+    	buf.append("[");
+    	boolean first = true;
+    	for(Data dt : data){
+    		//vuser.add(new Vusers(dt.timestamp, dt.threads));
+    		if(!first){
+        			buf.append(",");
+        			first=false;
+        		}
+        		 buf.append("["+dt.timestamp+", "+dt.threads+"]");
+        	
+        	}
+             buf.append("]");
     	
-    	renderJSON(name);
+    	//for(Vusers vus: vuser){
+    		//if(!first){
+    		//	buf.append(",");
+    		//	first=false;
+    	//	}
+    		// buf.append("["+vus.time+", "+vus.threads+"]");
+    	
+    	//}
+    	//buf.append("]");
+    	
+    	//JsonArray ar = new JsonArray();
+    	//ar.add(element)
+    	//String json = gson.toJson(buf.toString());
+    	
+    	//JsonArray arr = json.g
+    	//JsonParser parser = new JsonParser();
+    	//JsonArray array = parser.parse(json).getAsJsonArray();
+    	//JsonElement elem = gson.toJsonTree(vuser);
+    	renderJSON(buf.toString());
     }
     
     public static void info(String name){

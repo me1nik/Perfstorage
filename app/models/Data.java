@@ -15,7 +15,8 @@ import com.google.code.morphia.annotations.*;
 //@Embedded
 @Entity("jmeterdata")
 public class Data extends Model{
-	private String timestamp;
+	
+	public String timestamp;
     public String elapsed;
     public String label;
     public String success;

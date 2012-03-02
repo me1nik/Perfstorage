@@ -15,3 +15,4 @@ GET     /public/                                staticDir:public
 *       /{controller}/{action}                  {controller}.{action}
 POST /upload							Application.upload
 GET /jmeter.json                        Application.jmeterJson
+GET /vusers.json                        Application.vusers
