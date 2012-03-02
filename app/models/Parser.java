@@ -17,13 +17,13 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Parser {
-    //private List<Log> Logs;
-    private List<Data> data;
+    private List<Log> Logs;
+    //private List<Data> data;
     public Parser(File file,String name){
         try {
             CsvReader reader = new CsvReader(new FileReader(file));
-           // Logs = new ArrayList<Log>();
-            data = new ArrayList<Data>();
+            Logs = new ArrayList<Log>();
+          //  data = new ArrayList<Data>();
             reader.readHeaders();
             while (reader.readRecord()){
                 int i=0;
@@ -34,8 +34,8 @@ public class Parser {
                 String bytes = reader.get("bytes");
                 String threads = reader.get("allThreads");
                 String latency = reader.get("Latency");
-                //Logs.add(i,new Log(name,timestamp,elapsed,label,success,bytes,threads,latency));
-                data.add(i, new Data(timestamp,elapsed,label,success,bytes,threads,latency));
+                Logs.add(i,new Log(name,timestamp,elapsed,label,success,bytes,threads,latency));
+               // data.add(i, new Data(timestamp,elapsed,label,success,bytes,threads,latency));
                 i++;
             }
         } catch (IOException e) {
@@ -43,16 +43,16 @@ public class Parser {
         }
     }
 
-   /* public List<Log> getLogs() {
+    public List<Log> getLogs() {
         return Logs;
-    }*/
+    }
     
     
     public void uploadToMongo(){
         //upload;)
     }
 
-	public List<Data> getData() {
+/*	public List<Data> getData() {
 		return data;
-	}
+	}*/
 }

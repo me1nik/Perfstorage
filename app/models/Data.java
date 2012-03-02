@@ -1,6 +1,8 @@
 package models;
 
-import com.google.code.morphia.annotations.Embedded;
+import play.modules.morphia.Model;
+
+import com.google.code.morphia.annotations.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,8 +12,9 @@ import com.google.code.morphia.annotations.Embedded;
  * To change this template use File | Settings | File Templates.
  */
 
-@Embedded
-public class Data {
+//@Embedded
+@Entity("jmeterdata")
+public class Data extends Model{
 	private String timestamp;
     public String elapsed;
     public String label;
@@ -19,10 +22,11 @@ public class Data {
     public String bytes;
     public String threads;
     public String latency;
+    @Reference public JmeterLog name;
 
-	public Data(String timestamp, String elapsed, String label, String success,
+	public Data(JmeterLog name,String timestamp, String elapsed, String label, String success,
 			String bytes, String threads, String latency) {
-
+        this.name = name;
 		this.timestamp = timestamp;
 		this.elapsed = elapsed;
 		this.label = label;

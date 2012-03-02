@@ -18,27 +18,29 @@ import org.bson.types.ObjectId;
  * To change this template use File | Settings | File Templates.
  */
 
-@Entity("jmeter")
+@Entity("jmetertest")
 public class JmeterLog extends Model {
    
    //public ObjectId id;
-   @Id
+   //@Id
+   	
    public String nameTest;
-   @Embedded
-   public List<Data> data;
+   //@Embedded
+   //public Data data;
+  // public List<Data> data;
    
    public JmeterLog(String nameTest){
 	   this.nameTest = nameTest;
 	  // this.data = data;
    }
    
-   public void setData(List<Data> data){
+  /* public void setData(List<Data> data){
 	   this.data = data;
    }
 
    public List<Data> getData() {
 	return data;
-   }
+   }*/
    	
   
    

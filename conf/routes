@@ -13,5 +13,5 @@ GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
-POST /upload							Aplication.upload
-GET /jmeter.json                        Aplication.jmeterJson
+POST /upload							Application.upload
+GET /jmeter.json                        Application.jmeterJson
